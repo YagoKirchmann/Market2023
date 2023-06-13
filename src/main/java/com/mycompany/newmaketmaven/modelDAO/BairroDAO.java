@@ -1,19 +1,11 @@
 
 package com.mycompany.newmaketmaven.modelDAO;
 
-import java.sql.Connection;
 import java.util.List;
 import com.mycompany.newmaketmaven.model.Bairro;
-import java.sql.PreparedStatement;  
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import static org.eclipse.persistence.jpa.JpaHelper.getEntityManager;
 
 
 public class BairroDAO implements InterfaceDAO<Bairro>{
@@ -45,137 +37,61 @@ public class BairroDAO implements InterfaceDAO<Bairro>{
     @Override
     public void create(Bairro objeto) {
         
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "INSERT INTO bairro (descricao) VALUES (?)";
-        PreparedStatement pstm = null ;
-        
-        try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.executeUpdate();
-            
-        } catch (SQLException ex) {
-           ex.printStackTrace();
+         try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
         }
-        
-        ConnectionFactory.closeConnection(conexao, pstm);
         
     }
 
     @Override
     public Bairro retrieve(int codigo) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "SELECT bairro.id, bairro.descricao FROM bairro WHERE bairro.id = ?";  
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        
-        try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            pstm.setInt(1, codigo);
-            rst = pstm.executeQuery();
-            Bairro bairro = new Bairro();
-            
-            while(rst.next()){
-                bairro.setId(rst.getInt("id"));
-                bairro.setDescricao(rst.getString("descricao"));     
-            }
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return bairro;
-        }catch (SQLException ex){
-            ex.printStackTrace();
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return null;
-        }
+         return entityManager.find(Bairro.class, codigo);
     }
 
     @Override
     public Bairro retrieve(String descricao) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "SELECT bairro.id, bairro.descricao FROM bairro WHERE bairro.descricao = (?)";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
         
-        try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            pstm.setString(1, descricao);
-            rst = pstm.executeQuery();
-            Bairro bairro = new Bairro();
-            while(rst.next()){
-                bairro.setId(rst.getInt("id"));
-                bairro.setDescricao(rst.getString("descricao"));     
-            }
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return bairro;
-        }catch (SQLException ex){
-            ex.printStackTrace();
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return null;
-        }    
+        Bairro bairro = entityManager.createQuery("SELECT b FROM bairro b WHERE b.descricao = :parDescricao", Bairro.class).setParameter("parDescricao", descricao).getSingleResult();
+        return bairro;  
     }
 
     @Override
     public List<Bairro> retrieve() {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "SELECT bairro.id, bairro.descricao FROM bairro";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Bairro> listaBairro = new ArrayList<>();
-
-        try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            rst = pstm.executeQuery();
+        List<Bairro> bairros;
             
-            while(rst.next()){
-                Bairro bairro = new Bairro();
-                bairro.setId(rst.getInt("id"));
-                bairro.setDescricao(rst.getString("descricao"));
-                listaBairro.add(bairro);
-            }
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return listaBairro;
-            
-        }catch (SQLException ex) {
-            ex.printStackTrace();
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return null;
-        }
+        bairros = entityManager.createQuery("SELECT b FROM bairro b", Bairro.class).getResultList();
+        
+        return bairros;
     }
 
     @Override
     public void update(Bairro objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "UPDATE bairro SET bairro.descricao ('?') WHERE bairro.id = (?)";
-        PreparedStatement pstm = null;
-        
-        try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            pstm.setString(0, objeto.getDescricao());
-            pstm.setInt(1, objeto.getId());
-            pstm.executeUpdate();
-            
-        } catch (SQLException ex) {
+           try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
             ex.printStackTrace();
+            entityManager.getTransaction().rollback();   
         }
-        
-         ConnectionFactory.closeConnection(conexao,pstm);         
+            
     }
 
     @Override
     public void delete(Bairro objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "DELETE FROM bairro WHERE bairro.id = ?";
-        PreparedStatement pstm = null;
-        
-        try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            pstm.setInt(0,objeto.getId());
-            pstm.executeQuery();
-        } catch (SQLException ex) {
-          ex.printStackTrace();
+          try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();   
         }
-        
-        ConnectionFactory.closeConnection(conexao,pstm);   
-        
     }
     
 }

@@ -9,39 +9,27 @@ public class CidadeService{
 
     
     public static void criar(Cidade objeto) {
-        CidadeDAO cidadeDAO =  new CidadeDAO();
-        cidadeDAO.create(objeto);
+        CidadeDAO.getInstance().create(objeto);
     }
-
     
     public static Cidade buscar(int codigo) {
-        CidadeDAO cidadeDAO = new CidadeDAO();
-        return cidadeDAO.retrieve(codigo);
-       
+        return CidadeDAO.getInstance().retrieve(codigo);
     }
 
-   
     public static Cidade buscar(String descricao) {
-        CidadeDAO cidadeDAO = new CidadeDAO();
-        return cidadeDAO.retrieve(descricao);
+       return CidadeDAO.getInstance().retrieve(descricao);
     }
-
     
     public static List<Cidade> buscar() {
-        CidadeDAO cidadeDAO = new CidadeDAO();
-        return cidadeDAO.retrieve();
+       return  CidadeDAO.getInstance().retrieve();
     }
-
     
     public static void atualizar(Cidade objeto) {
-       CidadeDAO cidadeDAO = new CidadeDAO();
-       cidadeDAO.update(objeto);
+      CidadeDAO.getInstance().update(objeto);
     }
-
-   
+  
     public static void excluir(Cidade objeto) {
-        CidadeDAO cidadeDAO = new CidadeDAO();
-        cidadeDAO.delete(objeto);
+        CidadeDAO.getInstance().delete(objeto);
     }
-
+   
 }
