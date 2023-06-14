@@ -9,41 +9,27 @@ public class ColaboradorService{
 
     
     public static void criar(Colaborador objeto) {
-        ColaboradorDAO colaboradorDAO =  new ColaboradorDAO();
-        colaboradorDAO.create(objeto);
+        ColaboradorDAO.getInstance().create(objeto);
     }
-
     
     public static Colaborador buscar(int codigo) {
-        ColaboradorDAO colaboradorDAO = new ColaboradorDAO();
-        return colaboradorDAO.retrieve(codigo);
-       
+        return ColaboradorDAO.getInstance().retrieve(codigo);
     }
 
-   
     public static Colaborador buscar(String descricao) {
-        ColaboradorDAO colaboradorDAO = new ColaboradorDAO();
-        return colaboradorDAO.retrieve(descricao);
+       return ColaboradorDAO.getInstance().retrieve(descricao);
     }
-
     
     public static List<Colaborador> buscar() {
-        ColaboradorDAO colaboradorDAO = new ColaboradorDAO();
-        return colaboradorDAO.retrieve();
+       return  ColaboradorDAO.getInstance().retrieve();
     }
-
     
     public static void atualizar(Colaborador objeto) {
-       ColaboradorDAO colaboradorDAO = new ColaboradorDAO();
-       colaboradorDAO.update(objeto);
+      ColaboradorDAO.getInstance().update(objeto);
     }
-
-   
+  
     public static void excluir(Colaborador objeto) {
-        ColaboradorDAO colaboradorDAO = new ColaboradorDAO();
-        colaboradorDAO.delete(objeto);
+        ColaboradorDAO.getInstance().delete(objeto);
     }
-    
-    
-    
+   
 }

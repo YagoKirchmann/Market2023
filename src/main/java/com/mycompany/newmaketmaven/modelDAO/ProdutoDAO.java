@@ -7,40 +7,71 @@ package com.mycompany.newmaketmaven.modelDAO;
 
 import java.util.List;
 import com.mycompany.newmaketmaven.model.Produto;
+import static com.mycompany.newmaketmaven.model.Produto_.descricao;
+import javax.persistence.EntityManager;
 
-/**
- *
- * @author aluno
- */
+
 public class ProdutoDAO implements InterfaceDAO<com.mycompany.newmaketmaven.model.Produto> {
 
+    private static ProdutoDAO instance;
+    protected EntityManager entityManager;
+    
     @Override
     public void create(Produto objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
 
     @Override
     public Produto retrieve(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entityManager.find(Produto.class, codigo);
     }
 
     @Override
     public Produto retrieve(String desc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Produto produto = entityManager.createQuery("SELECT p FROM Produto p WHERE p.descricao = :parDescricao", Produto.class).setParameter("parDescricao", descricao).getSingleResult();
+
+        return produto;
     }
 
     @Override
     public List<Produto> retrieve() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Produto> produtos;
+            
+        produtos = entityManager.createQuery("SELECT p FROM Produto p", Produto.class).getResultList();
+        
+        return produtos;
     }
+
 
     @Override
     public void update(Produto objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();   
+        }
     }
 
     @Override
     public void delete(Produto objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            entityManager.getTransaction().begin();
+            objeto = entityManager.find(Produto.class, objeto.getId());
+            entityManager.remove(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
 }

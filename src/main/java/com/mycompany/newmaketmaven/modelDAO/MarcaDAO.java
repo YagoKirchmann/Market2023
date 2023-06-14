@@ -6,6 +6,8 @@ package com.mycompany.newmaketmaven.modelDAO;
 
 import java.util.List;
 import com.mycompany.newmaketmaven.model.Marca;
+import static com.mycompany.newmaketmaven.model.Marca_.descricao;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -13,33 +15,64 @@ import com.mycompany.newmaketmaven.model.Marca;
  */
 public class MarcaDAO implements InterfaceDAO<com.mycompany.newmaketmaven.model.Marca> {
 
+    private static MarcaDAO instance;
+    protected EntityManager entityManager;
+    
     @Override
     public void create(Marca objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
 
     @Override
     public Marca retrieve(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return entityManager.find(Marca.class, codigo);
     }
 
     @Override
     public Marca retrieve(String desc) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Marca marca = entityManager.createQuery("SELECT m FROM Marca m WHERE m.descricao = :parDescricao", Marca.class).setParameter("parDescricao", descricao).getSingleResult();
+
+        return marca;
     }
 
     @Override
     public List<Marca> retrieve() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Marca> marcas;
+            
+        marcas = entityManager.createQuery("SELECT m FROM Marca m", Marca.class).getResultList();
+        
+        return marcas;
     }
 
     @Override
     public void update(Marca objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();   
+        }
     }
 
     @Override
     public void delete(Marca objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            entityManager.getTransaction().begin();
+            objeto = entityManager.find(Marca.class, objeto.getId());
+            entityManager.remove(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
 }
