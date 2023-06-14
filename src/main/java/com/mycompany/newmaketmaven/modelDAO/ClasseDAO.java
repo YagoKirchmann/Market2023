@@ -4,14 +4,11 @@
  */
 package com.mycompany.newmaketmaven.modelDAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import com.mycompany.newmaketmaven.model.Classe;
 import java.util.List;
-import com.mycompany.newmaketmaven.model.Classe;
-import com.mycompany.newmaketmaven.model.Classe;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -19,141 +16,84 @@ import com.mycompany.newmaketmaven.model.Classe;
  */
 public class ClasseDAO implements InterfaceDAO<com.mycompany.newmaketmaven.model.Classe> {
 
-    @Override
-    public void create(Classe objeto) {
+    private static ClasseDAO instance;
+    protected EntityManager entityManager;
+    
+    public static ClasseDAO getInstance(){
+        if(instance == null){
+            instance = new ClasseDAO();
+    }
+        return instance;
+    }
+
+    private ClasseDAO() {
+        entityManager = getEntityManager();
+    }
+    
+    private EntityManager getEntityManager(){
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("com.mycompany_NewMarketMaven_jar_1.0-SNAPSHOTPU");
         
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "INSERT INTO classe (descricao) VALUES (?)";
-        PreparedStatement pstm = null ;
-        
-        try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.executeUpdate();
-            
-        } catch (SQLException ex) {
-           ex.printStackTrace();
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
         }
         
-        ConnectionFactory.closeConnection(conexao, pstm);
-        
+        return entityManager;
+    }
+    
+    @Override
+    public void create(Classe objeto) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
 
     @Override
     public Classe retrieve(int codigo) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "SELECT classe.id, classe.descricao FROM classe WHERE classe.id = ?";  
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        
-        try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            pstm.setInt(1, codigo);
-            rst = pstm.executeQuery();
-            Classe classe = new Classe();
-            
-            while(rst.next()){
-                classe.setId(rst.getInt("id"));
-                classe.setDescricao(rst.getString("descricao"));     
-            }
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return classe;
-        }catch (SQLException ex){
-            ex.printStackTrace();
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return null;
-        }
+       return entityManager.find(Classe.class, codigo);
     }
 
     @Override
     public Classe retrieve(String descricao) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "SELECT classe.id, classe.descricao FROM classe WHERE classe.descricao = (?)";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        
-        try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            pstm.setString(1, descricao);
-            rst = pstm.executeQuery();
-            Classe classe = new Classe();
-            while(rst.next()){
-                classe.setId(rst.getInt("id"));
-                classe.setDescricao(rst.getString("descricao"));     
-            }
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return classe;
-        }catch (SQLException ex){
-            ex.printStackTrace();
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return null;
-        }    
+       return entityManager
+               .createQuery("SELECT c FROM Classe c WHERE c.descricao = :parDescricao", Classe.class)
+               .setParameter("parDescricao", descricao)
+               .getSingleResult();
     }
 
     @Override
     public List<Classe> retrieve() {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "SELECT classe.id, classe.descricao FROM classe";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Classe> listaClasse = new ArrayList<>();
-
-        try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            rst = pstm.executeQuery();
-            
-            while(rst.next()){
-                Classe classe = new Classe();
-                classe.setId(rst.getInt("id"));
-                classe.setDescricao(rst.getString("descricao"));
-                listaClasse.add(classe);
-            }
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return listaClasse;
-            
-        }catch (SQLException ex) {
-            ex.printStackTrace();
-            ConnectionFactory.closeConnection(conexao,pstm,rst);
-            return null;
-        }
+        return entityManager.createQuery("SELECT c FROM Classe c", Classe.class)
+                .getResultList();
     }
 
     @Override
     public void update(Classe objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "UPDATE classe SET classe.descricao ? WHERE classe.id = ?";
-        PreparedStatement pstm = null;
-        
         try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.setInt(2, objeto.getId());
-            pstm.executeUpdate();
-            
-        } catch (SQLException ex) {
+            entityManager.getTransaction().begin();
+            entityManager.merge(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        
-         ConnectionFactory.closeConnection(conexao,pstm);         
+            entityManager.getTransaction().rollback();   
+        }        
     }
 
     @Override
     public void delete(Classe objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecute = "DELETE FROM classe WHERE classe.id = ?";
-        PreparedStatement pstm = null;
-        
-        try {
-            pstm = conexao.prepareStatement(sqlExecute);
-            pstm.setInt(0,objeto.getId());
-            pstm.executeQuery();
-        } catch (SQLException ex) {
-          ex.printStackTrace();
+          try {
+            entityManager.getTransaction().begin();
+            objeto = entityManager.find(Classe.class, objeto.getId());
+            entityManager.remove(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();   
         }
-        
-        ConnectionFactory.closeConnection(conexao,pstm);   
-        
     }
-    
 }
 

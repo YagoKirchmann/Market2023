@@ -56,7 +56,7 @@ public class BairroDAO implements InterfaceDAO<Bairro>{
     @Override
     public Bairro retrieve(String descricao) {
         
-        Bairro bairro = entityManager.createQuery("SELECT b FROM bairro b WHERE b.descricao = :parDescricao", Bairro.class).setParameter("parDescricao", descricao).getSingleResult();
+        Bairro bairro = entityManager.createQuery("SELECT b FROM Bairro b WHERE b.descricao = :parDescricao", Bairro.class).setParameter("parDescricao", descricao).getSingleResult();
         return bairro;  
     }
 
@@ -71,26 +71,26 @@ public class BairroDAO implements InterfaceDAO<Bairro>{
 
     @Override
     public void update(Bairro objeto) {
-           try {
+         try {
             entityManager.getTransaction().begin();
             entityManager.merge(objeto);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();   
-        }
-            
+        }      
     }
 
     @Override
     public void delete(Bairro objeto) {
           try {
             entityManager.getTransaction().begin();
-            entityManager.merge(objeto);
+            objeto = entityManager.find(Bairro.class, objeto.getId());
+            entityManager.remove(objeto);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();
-            entityManager.getTransaction().rollback();   
+            entityManager.getTransaction().rollback();
         }
     }
     
