@@ -11,22 +11,16 @@ import com.mycompany.newmaketmaven.model.Cliente;
 import com.mycompany.newmaketmaven.model.Endereco;
 import com.mycompany.newmaketmaven.view.NewBuscaCliente;
 import com.mycompany.newmaketmaven.view.NewViewClientes;
-import com.mycompany.newmaketmaven.modelDAO.ClienteDAO;
-import com.mycompany.newmaketmaven.modelDAO.EnderecoDAO;
 import com.mycompany.newmaketmaven.view.NewBuscaEndereco;
 import com.mycompany.newmaketmaven.services.ClienteService;
+import com.mycompany.newmaketmaven.services.EnderecoService;
 
-/**
- *
- * @author rafael.silva
- */
+
 public class ControllerClientes implements ActionListener{
     NewViewClientes telaCadClientes;
     public static int codigo;
     public static int codigoEnd;
-    
-    
-    
+      
     public ControllerClientes (NewViewClientes parTelaCadClientes){
         
         this.telaCadClientes = parTelaCadClientes;
@@ -61,8 +55,8 @@ public class ControllerClientes implements ActionListener{
             
             if(this.codigoEnd != 0){
                 Endereco endereco = new Endereco();
-                EnderecoDAO enderecoDAO = new EnderecoDAO();
-                endereco = enderecoDAO.retrieve(codigoEnd);
+                EnderecoService enderecoService = new EnderecoService();
+                endereco = EnderecoService.buscar(codigoEnd);
                   
                 telaCadClientes.getjTextFieldCidade().setText(endereco.getCidade().getDescricao()+ "");
                 telaCadClientes.getjTextFieldBairro().setText(endereco.getBairro().getDescricao()+ "");

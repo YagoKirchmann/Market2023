@@ -8,10 +8,8 @@ import com.mycompany.newmaketmaven.model.Bairro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import com.mycompany.newmaketmaven.view.NewBuscaBairro;
 import com.mycompany.newmaketmaven.view.NewViewBairro;
-import com.mycompany.newmaketmaven.modelDAO.BairroDAO;
 import com.mycompany.newmaketmaven.services.BairroService;
 import com.mycompany.newmaketmaven.utillities.Utils;
 

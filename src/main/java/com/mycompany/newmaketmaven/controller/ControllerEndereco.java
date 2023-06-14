@@ -8,28 +8,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import com.mycompany.newmaketmaven.model.Bairro;
-import com.mycompany.newmaketmaven.model.Endereco;
 import com.mycompany.newmaketmaven.model.Cidade;
 import com.mycompany.newmaketmaven.model.Endereco;
-import com.mycompany.newmaketmaven.modelDAO.BairroDAO;
-import com.mycompany.newmaketmaven.modelDAO.CidadeDAO;
 import com.mycompany.newmaketmaven.view.NewBuscaEndereco;
 import com.mycompany.newmaketmaven.view.NewViewEndereco;
-import com.mycompany.newmaketmaven.modelDAO.EnderecoDAO;
+import com.mycompany.newmaketmaven.services.BairroService;
+import com.mycompany.newmaketmaven.services.CidadeService;
+import com.mycompany.newmaketmaven.services.EnderecoService;
 import com.mycompany.newmaketmaven.view.NewBuscaBairro;
 import com.mycompany.newmaketmaven.view.NewBuscaCidade;
 
-/**
- *
- * @author rafael.silva
- */
+
 public class ControllerEndereco implements ActionListener{
     NewViewEndereco telaCadEndereco;
     public static int codigo;
     public static int codigoCid;
     public static int codigoBair;
     
-    
+
     public ControllerEndereco (NewViewEndereco parTelaCadEndereco){
         
         this.telaCadEndereco = parTelaCadEndereco;
@@ -42,11 +38,9 @@ public class ControllerEndereco implements ActionListener{
             telaCadEndereco.getjButtonSair().addActionListener(this);
             telaCadEndereco.getjButtonBuscaCida().addActionListener(this);
             telaCadEndereco.getjButtonBuscaBair().addActionListener(this);
-              
     
             telaCadEndereco.ativa(true);
-            telaCadEndereco.ligaDesliga(false);
-            
+            telaCadEndereco.ligaDesliga(false);   
     }
 
     @Override
@@ -64,8 +58,8 @@ public class ControllerEndereco implements ActionListener{
                 
             if(this.codigoCid != 0){
                 Cidade cidade = new Cidade();
-                CidadeDAO cidadeDAO = new CidadeDAO();
-                cidade = cidadeDAO.retrieve(codigoCid);
+                CidadeService cidadeService = new CidadeService();
+                cidade = cidadeService.buscar(codigoCid);
                   
                 telaCadEndereco.getjTextFieldCidade().setText(cidade.getDescricao()+ "");
             }          
@@ -77,8 +71,8 @@ public class ControllerEndereco implements ActionListener{
                 
             if(this.codigoBair != 0){
                 Bairro bairro = new Bairro();
-                BairroDAO bairroDAO = new BairroDAO();
-                bairro = bairroDAO.retrieve(codigoBair);
+                BairroService bairroService = new BairroService();
+                bairro = bairroService.buscar(codigoCid);
                   
                 telaCadEndereco.getjTextFieldBairro().setText(bairro.getDescricao()+ "");
             }          
@@ -98,8 +92,8 @@ public class ControllerEndereco implements ActionListener{
             
             if(this.codigo != 0){
                 Endereco endereco = new Endereco();
-                EnderecoDAO enderecoDAO = new EnderecoDAO();
-                endereco = enderecoDAO.retrieve(codigo);
+                EnderecoService enderecoService = new EnderecoService();
+                endereco = enderecoService.buscar(codigoCid);
                 
                 telaCadEndereco.ativa(false);
                 telaCadEndereco.ligaDesliga(true);
@@ -109,9 +103,7 @@ public class ControllerEndereco implements ActionListener{
                 telaCadEndereco.getjTextFieldBairro().setText(endereco.getBairro().getDescricao());
                 telaCadEndereco.getjTextFieldLogradouro().setText(endereco.getLogradouro()+ "");
                 telaCadEndereco.getjTextFieldCep().setEnabled(false);
-                
-                
-                
+ 
             }
             
         
@@ -127,25 +119,22 @@ public class ControllerEndereco implements ActionListener{
             }else {
                 
                 Endereco endereco = new Endereco();
-                Cidade cidade = (new CidadeDAO()).retrieve(telaCadEndereco.getjTextFieldCidade().getText()); // sttar valores
-                Bairro bairro = (new BairroDAO()).retrieve(telaCadEndereco.getjTextFieldBairro().getText()); // sttar valores
-                
-                
-                
+                Cidade cidade = (new CidadeService()).buscar(telaCadEndereco.getjTextFieldCidade().getText()); // sttar valores
+                Bairro bairro = (new BairroService()).buscar(telaCadEndereco.getjTextFieldBairro().getText()); // sttar valores
                 
                 endereco.setCidade(cidade);
                 endereco.setBairro(bairro);
                 endereco.setLogradouro(telaCadEndereco.getjTextFieldLogradouro().getText());
                 endereco.setCep(telaCadEndereco.getjTextFieldCep().getText());
                 
-                EnderecoDAO enderecoDAO = new EnderecoDAO();
+                EnderecoService enderecoService = new EnderecoService();
                 
                 if(codigo != 0){
                     endereco.setId(codigo);
-                    enderecoDAO.update(endereco);
+                    enderecoService.atualizar(endereco);
                     
                 }else{
-                    enderecoDAO.create(endereco);
+                    enderecoService.criar(endereco);
                 };
                 telaCadEndereco.ativa(true);
                 telaCadEndereco.ligaDesliga(false);
