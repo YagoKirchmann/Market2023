@@ -4,6 +4,8 @@ package com.mycompany.newmaketmaven.modelDAO;
 import java.util.List;
 import com.mycompany.newmaketmaven.model.Endereco;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 
 
@@ -12,18 +14,26 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
     private static EnderecoDAO instance;
     protected EntityManager entityManager;
     
-    @Override
-    public void create(Endereco objeto) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(objeto);
-            entityManager.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            entityManager.getTransaction().rollback();
-        }
+    public static EnderecoDAO getInstance(){
+        if(instance == null){
+            instance = new EnderecoDAO();
+    }
+        return instance;
     }
 
+    private EnderecoDAO() {
+        entityManager = getEntityManager();
+    }
+    
+    private EntityManager getEntityManager(){
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("com.mycompany_NewMarketMaven_jar_1.0-SNAPSHOTPU");
+        
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        
+        return entityManager;
+    }
     @Override
     public Endereco retrieve(int codigo) {
         return entityManager.find(Endereco.class, codigo);
@@ -69,5 +79,10 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
         }
+    }
+
+    @Override
+    public void create(Endereco objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

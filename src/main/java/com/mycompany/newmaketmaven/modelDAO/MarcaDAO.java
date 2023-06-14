@@ -8,6 +8,8 @@ import java.util.List;
 import com.mycompany.newmaketmaven.model.Marca;
 import static com.mycompany.newmaketmaven.model.Marca_.descricao;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -17,6 +19,27 @@ public class MarcaDAO implements InterfaceDAO<com.mycompany.newmaketmaven.model.
 
     private static MarcaDAO instance;
     protected EntityManager entityManager;
+    
+    public static MarcaDAO getInstance(){
+        if(instance == null){
+            instance = new MarcaDAO();
+    }
+        return instance;
+    }
+
+    private MarcaDAO() {
+        entityManager = getEntityManager();
+    }
+    
+    private EntityManager getEntityManager(){
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("com.mycompany_NewMarketMaven_jar_1.0-SNAPSHOTPU");
+        
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        
+        return entityManager;
+    }
     
     @Override
     public void create(Marca objeto) {

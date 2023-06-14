@@ -9,6 +9,8 @@ import java.util.List;
 import com.mycompany.newmaketmaven.model.Produto;
 import static com.mycompany.newmaketmaven.model.Produto_.descricao;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 
 public class ProdutoDAO implements InterfaceDAO<com.mycompany.newmaketmaven.model.Produto> {
@@ -16,6 +18,26 @@ public class ProdutoDAO implements InterfaceDAO<com.mycompany.newmaketmaven.mode
     private static ProdutoDAO instance;
     protected EntityManager entityManager;
     
+    public static ProdutoDAO getInstance(){
+        if(instance == null){
+            instance = new ProdutoDAO();
+    }
+        return instance;
+    }
+
+    private ProdutoDAO() {
+        entityManager = getEntityManager();
+    }
+    
+    private EntityManager getEntityManager(){
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("com.mycompany_NewMarketMaven_jar_1.0-SNAPSHOTPU");
+        
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        
+        return entityManager;
+    }
     @Override
     public void create(Produto objeto) {
         try {
