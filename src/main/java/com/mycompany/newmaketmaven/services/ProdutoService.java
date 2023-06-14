@@ -11,42 +11,27 @@ public class ProdutoService{
 
     
     public static void criar(Produto objeto) {
-        ProdutoDAO produtoDAO =  new ProdutoDAO();
-        produtoDAO.create(objeto);
+        ProdutoDAO.getInstance().create(objeto);
     }
-
     
     public static Produto buscar(int codigo) {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        return produtoDAO.retrieve(codigo);
-       
+        return ProdutoDAO.getInstance().retrieve(codigo);
     }
 
-   
     public static Produto buscar(String descricao) {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        return produtoDAO.retrieve(descricao);
+       return ProdutoDAO.getInstance().retrieve(descricao);
     }
-
     
     public static List<Produto> buscar() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        return produtoDAO.retrieve();
+       return  ProdutoDAO.getInstance().retrieve();
     }
-
     
     public static void atualizar(Produto objeto) {
-       ProdutoDAO produtoDAO = new ProdutoDAO();
-       produtoDAO.update(objeto);
+      ProdutoDAO.getInstance().update(objeto);
     }
-
-   
+  
     public static void excluir(Produto objeto) {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        produtoDAO.delete(objeto);
+        ProdutoDAO.getInstance().delete(objeto);
     }
-    
-    
-    
+   
 }
-

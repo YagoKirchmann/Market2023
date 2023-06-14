@@ -6,6 +6,7 @@ package com.mycompany.newmaketmaven.modelDAO;
 
 import java.util.List;
 import com.mycompany.newmaketmaven.model.Fornecedor;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -13,33 +14,64 @@ import com.mycompany.newmaketmaven.model.Fornecedor;
  */
 public class FornecedorDAO implements InterfaceDAO<com.mycompany.newmaketmaven.model.Fornecedor> {
 
+    private static FornecedorDAO instance;
+    protected EntityManager entityManager;
+    
     @Override
     public void create(Fornecedor objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
 
     @Override
     public Fornecedor retrieve(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return entityManager.find(Fornecedor.class, codigo);
     }
 
     @Override
-    public Fornecedor retrieve(String desc) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Fornecedor retrieve(String cnpj) {
+        Fornecedor fornecedor = entityManager.createQuery("SELECT f FROM Fornecedor f WHERE f.cnpj = :parCNPJ", Fornecedor.class).setParameter("parCNPJ", cnpj).getSingleResult();
+
+        return fornecedor;
     }
 
     @Override
     public List<Fornecedor> retrieve() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Fornecedor> fornecedors;
+            
+        fornecedors = entityManager.createQuery("SELECT f FROM Fornecedor f", Fornecedor.class).getResultList();
+        
+        return fornecedors;
     }
 
     @Override
     public void update(Fornecedor objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();   
+        }
     }
 
     @Override
     public void delete(Fornecedor objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            entityManager.getTransaction().begin();
+            objeto = entityManager.find(Fornecedor.class, objeto.getId());
+            entityManager.remove(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
 }

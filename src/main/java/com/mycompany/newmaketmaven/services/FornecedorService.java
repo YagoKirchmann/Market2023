@@ -9,39 +9,27 @@ public class FornecedorService{
 
     
     public static void criar(Fornecedor objeto) {
-        FornecedorDAO classeDAO =  new FornecedorDAO();
-        classeDAO.create(objeto);
+        FornecedorDAO.getInstance().create(objeto);
     }
-
     
     public static Fornecedor buscar(int codigo) {
-        FornecedorDAO classeDAO = new FornecedorDAO();
-        return classeDAO.retrieve(codigo);
-       
+        return FornecedorDAO.getInstance().retrieve(codigo);
     }
 
-   
     public static Fornecedor buscar(String descricao) {
-        FornecedorDAO classeDAO = new FornecedorDAO();
-        return classeDAO.retrieve(descricao);
+       return FornecedorDAO.getInstance().retrieve(descricao);
     }
-
     
     public static List<Fornecedor> buscar() {
-        FornecedorDAO classeDAO = new FornecedorDAO();
-        return classeDAO.retrieve();
+       return  FornecedorDAO.getInstance().retrieve();
     }
-
     
     public static void atualizar(Fornecedor objeto) {
-       FornecedorDAO classeDAO = new FornecedorDAO();
-       classeDAO.update(objeto);
+      FornecedorDAO.getInstance().update(objeto);
     }
-
-   
+  
     public static void excluir(Fornecedor objeto) {
-        FornecedorDAO classeDAO = new FornecedorDAO();
-        classeDAO.delete(objeto);
+        FornecedorDAO.getInstance().delete(objeto);
     }
-    
+   
 }

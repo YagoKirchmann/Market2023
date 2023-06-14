@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 
+
 public class CondPgtoDAO implements InterfaceDAO<CondicaoPgto>{
 
      private static CondPgtoDAO instance;
