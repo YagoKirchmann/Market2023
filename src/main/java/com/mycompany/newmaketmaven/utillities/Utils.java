@@ -17,7 +17,7 @@ public class Utils {
 
         for (Component componente : componentes) {
             if (componente instanceof JButton) {
-                if ("0".equals(((JButton) componente).getActionCommand())) {
+                if ((((JButton) componente).getActionCommand() == "0")) {
                     componente.setEnabled(!estadoComponente);
                 } else {
                     componente.setEnabled(estadoComponente);

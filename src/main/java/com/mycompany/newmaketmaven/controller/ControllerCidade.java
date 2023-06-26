@@ -27,8 +27,7 @@ public class ControllerCidade implements ActionListener{
     public ControllerCidade (NewViewCidade parTelaCadCidade){
         
         this.telaCadCidade = parTelaCadCidade;
-        
-            
+               
             telaCadCidade.getjButtonBuscar().addActionListener(this);
             telaCadCidade.getjButtonCancelar().addActionListener(this);
             telaCadCidade.getjButtonGravar().addActionListener(this);
@@ -36,8 +35,7 @@ public class ControllerCidade implements ActionListener{
             telaCadCidade.getjButtonSair().addActionListener(this);
     
             Utils.ativa(true, telaCadCidade.getjPanel2());
-            Utils.ligaDesliga(false, telaCadCidade.getjPanel3());
-            
+            Utils.ligaDesliga(false, telaCadCidade.getjPanel3());       
     }
     
 

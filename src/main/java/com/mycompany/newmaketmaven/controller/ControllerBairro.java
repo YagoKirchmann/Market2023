@@ -22,8 +22,6 @@ public class ControllerBairro implements ActionListener{
     NewViewBairro telaCadBairro;
     public static int codigo;
 
-
-    
     public ControllerBairro (NewViewBairro parTelaCadBairro){
 
         this.telaCadBairro = parTelaCadBairro;

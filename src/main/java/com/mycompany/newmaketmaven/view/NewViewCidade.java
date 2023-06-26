@@ -22,32 +22,11 @@ public class NewViewCidade extends javax.swing.JFrame {
      * @return the descricao
      */
     
-     public void ativa(boolean estadoComponente){
-        jButtonNovo.setEnabled(estadoComponente);
-        jButtonCancelar.setEnabled(!estadoComponente);
-        jButtonGravar.setEnabled(!estadoComponente);
-        jButtonBuscar.setEnabled(estadoComponente);
-        jButtonSair.setEnabled(estadoComponente);  
+        public NewViewCidade() {
+        initComponents();
     }
-     
-    public void ligaDesliga(boolean estadoComponente) {
 
-        Component[] componentes = jPanel3.getComponents();
-        for (Component componente : componentes) {
-            if (componente instanceof JTextField) {
-                ((JTextField) componente).setText("");
-            }else if (componente instanceof JFormattedTextField) {
-                ((JFormattedTextField) componente).setText("");
-            }else if (componente instanceof JTextArea) {
-                ((JTextArea) componente).setText("");
-            }else if (componente instanceof JComboBox) {
-                ((JComboBox) componente).setSelectedIndex(0);
-            }else if (componente instanceof JScrollPane) {
-               //((JScrollPane) componente).getClass().
-            }
-            componente.setEnabled(estadoComponente);
-        }
-    }
+    
     public javax.swing.JTextField getTxtDescricao() {
         return TxtDescricao;
     }
@@ -125,9 +104,6 @@ public class NewViewCidade extends javax.swing.JFrame {
     /**
      * Creates new form newMarket22View
      */
-    public NewViewCidade() {
-        initComponents();
-    }
 
      
     /**
@@ -191,6 +167,7 @@ public class NewViewCidade extends javax.swing.JFrame {
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\aluno\\Documents\\Kirchmann\\Yago\\NewMarketMaven\\src\\test\\java\\imagens\\AAA\\Delete.png")); // NOI18N
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setActionCommand("0");
         jButtonCancelar.setEnabled(false);
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,6 +178,7 @@ public class NewViewCidade extends javax.swing.JFrame {
 
         jButtonGravar.setIcon(new javax.swing.ImageIcon("C:\\Users\\aluno\\Documents\\Kirchmann\\Yago\\NewMarketMaven\\src\\test\\java\\imagens\\AAA\\OK.png")); // NOI18N
         jButtonGravar.setText("Gravar");
+        jButtonGravar.setActionCommand("0");
         jButtonGravar.setEnabled(false);
         jButtonGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,6 +206,7 @@ public class NewViewCidade extends javax.swing.JFrame {
         TxtDescricao.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         TxtDescricao.setText("Descrição");
         TxtDescricao.setToolTipText("Descrição");
+        TxtDescricao.setEnabled(false);
         TxtDescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtDescricaoActionPerformed(evt);

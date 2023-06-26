@@ -246,17 +246,9 @@ public class NewViewClasse extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-       
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
-
     private void TxtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDescricaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtDescricaoActionPerformed
-
-    private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
-       
-    }//GEN-LAST:event_jButtonGravarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
        
@@ -266,6 +258,14 @@ public class NewViewClasse extends javax.swing.JFrame {
         // TODO add your handling code here:
         TxtId.setText("Id");
     }//GEN-LAST:event_TxtIdActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
+
+    }//GEN-LAST:event_jButtonGravarActionPerformed
 
     /**
      * @param args the command line arguments
