@@ -55,7 +55,6 @@ public class BairroDAO implements InterfaceDAO<Bairro>{
 
     @Override
     public Bairro retrieve(String descricao) {
-        
         Bairro bairro = entityManager.createQuery("SELECT b FROM Bairro b WHERE b.descricao = :parDescricao", Bairro.class).setParameter("parDescricao", descricao).getSingleResult();
         return bairro;  
     }
@@ -63,9 +62,7 @@ public class BairroDAO implements InterfaceDAO<Bairro>{
     @Override
     public List<Bairro> retrieve() {
         List<Bairro> bairros;
-            
-        bairros = entityManager.createQuery("SELECT b FROM bairro b", Bairro.class).getResultList();
-        
+        bairros = entityManager.createQuery("SELECT b FROM bairro b", Bairro.class).getResultList();      
         return bairros;
     }
 

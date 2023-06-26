@@ -36,7 +36,7 @@ public class ControllerCidade implements ActionListener{
             telaCadCidade.getjButtonSair().addActionListener(this);
     
             Utils.ativa(true, telaCadCidade.getjPanel2());
-            Utils.ligaDesliga(false,telaCadCidade.getjPanel3());
+            Utils.ligaDesliga(false, telaCadCidade.getjPanel3());
             
     }
     
@@ -44,14 +44,13 @@ public class ControllerCidade implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == telaCadCidade.getjButtonNovo()) {
-            telaCadCidade.ativa(false);
-            telaCadCidade.ligaDesliga(true);
+            Utils.ativa(false, telaCadCidade.getjPanel2());
+            Utils.ligaDesliga(true,telaCadCidade.getjPanel3());
             telaCadCidade.getTxtId().setEnabled(false);
             telaCadCidade.getTxtDescricao().requestFocus();
             
         } else if (e.getSource() == telaCadCidade.getjButtonCancelar()) {
-            telaCadCidade.ativa(true);
-            telaCadCidade.ligaDesliga(false);
+
             
         } else if (e.getSource() == telaCadCidade.getjButtonBuscar()) {
             this.codigo = 0;

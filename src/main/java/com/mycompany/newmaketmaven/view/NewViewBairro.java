@@ -222,6 +222,7 @@ public class NewViewBairro extends javax.swing.JFrame {
         TxtDescricao.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         TxtDescricao.setText("Descrição");
         TxtDescricao.setToolTipText("Descrição");
+        TxtDescricao.setEnabled(false);
         TxtDescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtDescricaoActionPerformed(evt);

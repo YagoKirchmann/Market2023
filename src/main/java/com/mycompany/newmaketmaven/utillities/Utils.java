@@ -17,7 +17,7 @@ public class Utils {
 
         for (Component componente : componentes) {
             if (componente instanceof JButton) {
-                if (((JButton) componente).getActionCommand() == "0") {
+                if ("0".equals(((JButton) componente).getActionCommand())) {
                     componente.setEnabled(!estadoComponente);
                 } else {
                     componente.setEnabled(estadoComponente);
@@ -44,7 +44,7 @@ public class Utils {
             } else if (componente instanceof JScrollPane) {
                 //((JScrollPane) componente).getClass().
             }
-            componente.setEnabled(true);
+            componente.setEnabled(estadoComponentem);
         }
     }
 }
