@@ -12,6 +12,7 @@ import com.mycompany.newmaketmaven.modelDAO.ClasseDAO;
 import com.mycompany.newmaketmaven.view.NewBuscaClasse;
 import com.mycompany.newmaketmaven.view.NewViewClasse;
 import com.mycompany.newmaketmaven.services.ClasseService;
+import com.mycompany.newmaketmaven.utillities.Utils;
 
 /**
  *
@@ -32,22 +33,22 @@ public class ControllerClasse implements ActionListener{
             telaCadClasse.getjButtonNovo().addActionListener(this);
             telaCadClasse.getjButtonSair().addActionListener(this);
     
-            telaCadClasse.ativa(true);
-            telaCadClasse.ligaDesliga(false);
+            Utils.ativa(true, telaCadClasse.getjPanel2());
+            Utils.ligaDesliga(false, telaCadClasse.getjPanel3()); 
             
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == telaCadClasse.getjButtonNovo()) {
-            telaCadClasse.ativa(false);
-            telaCadClasse.ligaDesliga(true);
+            Utils.ativa(false, telaCadClasse.getjPanel2());
+            Utils.ligaDesliga(true, telaCadClasse.getjPanel3());;
             telaCadClasse.getTxtId().setEnabled(false);
             telaCadClasse.getTxtDescricao().requestFocus();
             
         } else if (e.getSource() == telaCadClasse.getjButtonCancelar()) {
-            telaCadClasse.ativa(true);
-            telaCadClasse.ligaDesliga(false);
+            Utils.ativa(true, telaCadClasse.getjPanel2());
+            Utils.ligaDesliga(false, telaCadClasse.getjPanel3());
             
         }else if (e.getSource() == telaCadClasse.getjButtonBuscar()) {
             this.codigo = 0;
@@ -61,8 +62,8 @@ public class ControllerClasse implements ActionListener{
                 ClasseService classeService = new ClasseService();
                 classe = classeService.buscar(codigo);
                 
-                telaCadClasse.ativa(false);
-                telaCadClasse.ligaDesliga(true);
+                    Utils.ativa(false, telaCadClasse.getjPanel2());
+            Utils.ligaDesliga(true, telaCadClasse.getjPanel3());
                 
                 telaCadClasse.getTxtId().setText(classe.getId()+ "");
                 telaCadClasse.getTxtDescricao().setText(classe.getDescricao());
@@ -79,8 +80,8 @@ public class ControllerClasse implements ActionListener{
                 ClasseService classeService = new ClasseService();
                 classeService.criar(classe);
                 
-                telaCadClasse.ativa(true);
-                telaCadClasse.ligaDesliga(false);
+            Utils.ativa(true, telaCadClasse.getjPanel2());
+            Utils.ligaDesliga(false, telaCadClasse.getjPanel3());
             }
         } else if(e.getSource() == telaCadClasse.getjButtonSair()) {
             telaCadClasse.dispose();        

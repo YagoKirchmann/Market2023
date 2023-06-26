@@ -14,6 +14,7 @@ import com.mycompany.newmaketmaven.view.NewViewClientes;
 import com.mycompany.newmaketmaven.view.NewBuscaEndereco;
 import com.mycompany.newmaketmaven.services.ClienteService;
 import com.mycompany.newmaketmaven.services.EnderecoService;
+import com.mycompany.newmaketmaven.utillities.Utils;
 
 
 public class ControllerClientes implements ActionListener{
@@ -32,16 +33,16 @@ public class ControllerClientes implements ActionListener{
             telaCadClientes.getjButtonSair().addActionListener(this);
             telaCadClientes.getjButtonPesquisaCida().addActionListener(this);
     
-            telaCadClientes.ativa(true);
-            telaCadClientes.ligaDesliga(false);
+            Utils.ativa(true, telaCadClientes.getjPanel2());
+            Utils.ligaDesliga(false, telaCadClientes.getjPanel3()); 
             
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == telaCadClientes.getjButtonNovo()) {
-            telaCadClientes.ativa(false);
-            telaCadClientes.ligaDesliga(true);
+            Utils.ativa(false, telaCadClientes.getjPanel2());
+            Utils.ligaDesliga(true, telaCadClientes.getjPanel3()); 
             telaCadClientes.getjTextFieldLogradouro().setEnabled(false);
             telaCadClientes.getjTextFieldCidade().setEnabled(false);
             telaCadClientes.getjTextFieldBairro().setEnabled(false);  
@@ -65,8 +66,8 @@ public class ControllerClientes implements ActionListener{
             
             
         } else if (e.getSource() == telaCadClientes.getjButtonCancelar()) {
-            telaCadClientes.ativa(true);
-            telaCadClientes.ligaDesliga(false);
+            Utils.ativa(true, telaCadClientes.getjPanel2());
+            Utils.ligaDesliga(false, telaCadClientes.getjPanel3()); 
             
         } else if (e.getSource() == telaCadClientes.getjButtonBuscar()) {
             this.codigo = 0;
@@ -80,8 +81,8 @@ public class ControllerClientes implements ActionListener{
                 ClienteService clienteService = new ClienteService();
                 cliente = clienteService.buscar(codigo);
                 
-                telaCadClientes.ativa(false);
-                telaCadClientes.ligaDesliga(true);
+            Utils.ativa(false, telaCadClientes.getjPanel2());
+            Utils.ligaDesliga(true, telaCadClientes.getjPanel3()); 
                 
                 telaCadClientes.getjTextFieldCpf().setText(cliente.getCpf()+ "");
                 telaCadClientes.getjTextFieldRg().setText(cliente.getRg()+ "");
@@ -110,8 +111,8 @@ public class ControllerClientes implements ActionListener{
             }else {
                 Cliente cliente = new Cliente();
                 cliente.setCpf(telaCadClientes.getjTextFieldCpf().getText());
-                telaCadClientes.ativa(true);
-                telaCadClientes.ligaDesliga(false);
+            Utils.ativa(true, telaCadClientes.getjPanel2());
+            Utils.ligaDesliga(false, telaCadClientes.getjPanel3()); 
             }
         } else if(e.getSource() == telaCadClientes.getjButtonSair()) {
             telaCadClientes.dispose();        

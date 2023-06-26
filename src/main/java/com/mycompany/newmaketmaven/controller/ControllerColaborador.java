@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import com.mycompany.newmaketmaven.model.Colaborador;
+import com.mycompany.newmaketmaven.utillities.Utils;
 import com.mycompany.newmaketmaven.view.NewBuscaColaborador;
 import com.mycompany.newmaketmaven.view.NewViewColaborador;
 
@@ -30,24 +31,24 @@ public class ControllerColaborador implements ActionListener{
             telaCadColaborador.getjButtonNovo().addActionListener(this);
             telaCadColaborador.getjButtonSair().addActionListener(this);
     
-            telaCadColaborador.ativa(true);
-            telaCadColaborador.ligaDesliga(false);
+            Utils.ativa(true, telaCadColaborador.getjPanel2());
+            Utils.ligaDesliga(false, telaCadColaborador.getjPanel3()); 
             
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == telaCadColaborador.getjButtonNovo()) {
-            telaCadColaborador.ativa(false);
-            telaCadColaborador.ligaDesliga(true);
+            Utils.ativa(false, telaCadColaborador.getjPanel2());
+            Utils.ligaDesliga(true, telaCadColaborador.getjPanel3()); 
             telaCadColaborador.getjTextFieldLogradouro().setEnabled(false);
             telaCadColaborador.getjTextFieldCidade().setEnabled(false);
             telaCadColaborador.getjTextFieldBairro().setEnabled(false);  
             telaCadColaborador.getjTextFieldNome().requestFocus();
             
         } else if (e.getSource() == telaCadColaborador.getjButtonCancelar()) {
-            telaCadColaborador.ativa(true);
-            telaCadColaborador.ligaDesliga(false);
+            Utils.ativa(true, telaCadColaborador.getjPanel2());
+            Utils.ligaDesliga(false, telaCadColaborador.getjPanel3()); 
             
         } else if (e.getSource() == telaCadColaborador.getjButtonBuscar()) {
             NewBuscaColaborador telaBusca = new NewBuscaColaborador();
@@ -70,8 +71,8 @@ public class ControllerColaborador implements ActionListener{
             }else {
                 Colaborador colaborador = new Colaborador();
                 colaborador.setNome(telaCadColaborador.getjTextFieldNome().getText());
-                telaCadColaborador.ativa(true);
-                telaCadColaborador.ligaDesliga(false);
+            Utils.ativa(true, telaCadColaborador.getjPanel2());
+            Utils.ligaDesliga(false, telaCadColaborador.getjPanel3()); 
             }
         } else if(e.getSource() == telaCadColaborador.getjButtonSair()) {
             telaCadColaborador.dispose();        

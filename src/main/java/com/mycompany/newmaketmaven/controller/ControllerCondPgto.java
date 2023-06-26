@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import com.mycompany.newmaketmaven.model.CondicaoPgto;
+import com.mycompany.newmaketmaven.utillities.Utils;
 import com.mycompany.newmaketmaven.view.NewBuscaCondPgto;
 import com.mycompany.newmaketmaven.view.NewViewCondPgto;
 
@@ -29,21 +30,21 @@ public class ControllerCondPgto implements ActionListener{
             telaCadCondPgto.getjButtonNovo().addActionListener(this);
             telaCadCondPgto.getjButtonSair().addActionListener(this);
     
-            telaCadCondPgto.ativa(true);
-            telaCadCondPgto.ligaDesliga(false);
+            Utils.ativa(true, telaCadCondPgto.getjPanel2());
+            Utils.ligaDesliga(false, telaCadCondPgto.getjPanel3()); 
             
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == telaCadCondPgto.getjButtonNovo()) {
-            telaCadCondPgto.ativa(false);
-            telaCadCondPgto.ligaDesliga(true);
+            Utils.ativa(false, telaCadCondPgto.getjPanel2());
+            Utils.ligaDesliga(true, telaCadCondPgto.getjPanel3()); 
             telaCadCondPgto.getjTextFieldDescricao().requestFocus();
             
         } else if (e.getSource() == telaCadCondPgto.getjButtonCancelar()) {
-            telaCadCondPgto.ativa(true);
-            telaCadCondPgto.ligaDesliga(false);
+            Utils.ativa(true, telaCadCondPgto.getjPanel2());
+            Utils.ligaDesliga(false, telaCadCondPgto.getjPanel3()); 
             
         } else if (e.getSource() == telaCadCondPgto.getjButtonBuscar()) {
             NewBuscaCondPgto telaBusca = new NewBuscaCondPgto();
@@ -60,8 +61,8 @@ public class ControllerCondPgto implements ActionListener{
             }else {
                 CondicaoPgto condicaoPgto = new CondicaoPgto();
                 condicaoPgto.setDescricaoCondicao(telaCadCondPgto.getjTextFieldDescricao().getText());
-                telaCadCondPgto.ativa(true);
-                telaCadCondPgto.ligaDesliga(false);
+                Utils.ativa(true, telaCadCondPgto.getjPanel2());
+                Utils.ligaDesliga(false, telaCadCondPgto.getjPanel3()); 
             }
         } else if(e.getSource() == telaCadCondPgto.getjButtonSair()) {
             telaCadCondPgto.dispose();        
