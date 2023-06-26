@@ -39,6 +39,20 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
         
         return entityManager;
     }
+    
+        @Override
+    public void create(Fornecedor objeto) {
+          try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+    }
+    
+    
     @Override
     public Fornecedor retrieve(int codigo) {
         return entityManager.find(Fornecedor.class, codigo);
@@ -85,8 +99,5 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
         }
     }
 
-    @Override
-    public void create(Fornecedor objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 }

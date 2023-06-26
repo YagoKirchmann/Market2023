@@ -30,8 +30,7 @@ public class ControllerClientes implements ActionListener{
     public ControllerClientes (NewViewClientes parTelaCadClientes){
         
         this.telaCadClientes = parTelaCadClientes;
-        
-            
+  
             telaCadClientes.getjButtonBuscar().addActionListener(this);
             telaCadClientes.getjButtonCancelar().addActionListener(this);
             telaCadClientes.getjButtonGravar().addActionListener(this);

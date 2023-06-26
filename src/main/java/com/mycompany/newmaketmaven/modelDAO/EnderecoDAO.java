@@ -34,6 +34,20 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
         
         return entityManager;
     }
+    
+    @Override
+    public void create(Endereco objeto) {
+            try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+    }
+    
+    
     @Override
     public Endereco retrieve(int codigo) {
         return entityManager.find(Endereco.class, codigo);
@@ -81,8 +95,5 @@ public class EnderecoDAO implements InterfaceDAO<Endereco> {
         }
     }
 
-    @Override
-    public void create(Endereco objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 }
