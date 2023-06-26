@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Cliente extends Pessoa implements Serializable  {
@@ -17,6 +19,7 @@ public class Cliente extends Pessoa implements Serializable  {
     @Column
     private String rg;
     @Column
+    @Temporal(TemporalType.DATE)
     private Date dtNascimento;
     @Column
     private char sexo;
