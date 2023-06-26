@@ -356,6 +356,7 @@ public class NewViewFornecedor extends javax.swing.JFrame {
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\aluno\\Documents\\Kirchmann\\Yago\\NewMarketMaven\\src\\test\\java\\imagens\\AAA\\Delete.png")); // NOI18N
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setActionCommand("0");
         jButtonCancelar.setEnabled(false);
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,6 +367,7 @@ public class NewViewFornecedor extends javax.swing.JFrame {
 
         jButtonGravar.setIcon(new javax.swing.ImageIcon("C:\\Users\\aluno\\Documents\\Kirchmann\\Yago\\NewMarketMaven\\src\\test\\java\\imagens\\AAA\\OK.png")); // NOI18N
         jButtonGravar.setText("Gravar");
+        jButtonGravar.setActionCommand("0");
         jButtonGravar.setEnabled(false);
         jButtonGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

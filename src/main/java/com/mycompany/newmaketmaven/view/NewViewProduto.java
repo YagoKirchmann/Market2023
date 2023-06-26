@@ -4,6 +4,8 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -26,31 +28,191 @@ public class NewViewProduto extends javax.swing.JFrame {
         initComponents();
     }
 
-     public void ativa(boolean estadoComponente){
-        jButtonNovo.setEnabled(estadoComponente);
-        jButtonCancelar.setEnabled(!estadoComponente);
-        jButtonGravar.setEnabled(!estadoComponente);
-        jButtonBuscar.setEnabled(estadoComponente);
-        jButtonSair.setEnabled(estadoComponente);  
+    public JButton getjButtonBuscaClasse() {
+        return jButtonBuscaClasse;
     }
-      public void ligaDesliga(boolean estadoComponente) {
 
-        Component[] componentes = jPanel3.getComponents();
-        for (Component componente : componentes) {
-            if (componente instanceof JTextField) {
-                ((JTextField) componente).setText("");
-            }else if (componente instanceof JFormattedTextField) {
-                ((JFormattedTextField) componente).setText("");
-            }else if (componente instanceof JTextArea) {
-                ((JTextArea) componente).setText("");
-            }else if (componente instanceof JComboBox) {
-                ((JComboBox) componente).setSelectedIndex(0);
-            }else if (componente instanceof JScrollPane) {
-               //((JScrollPane) componente).getClass().
-            }
-            componente.setEnabled(estadoComponente);
-        }
+    public void setjButtonBuscaClasse(JButton jButtonBuscaClasse) {
+        this.jButtonBuscaClasse = jButtonBuscaClasse;
     }
+
+    public JButton getjButtonBuscaMarca() {
+        return jButtonBuscaMarca;
+    }
+
+    public void setjButtonBuscaMarca(JButton jButtonBuscaMarca) {
+        this.jButtonBuscaMarca = jButtonBuscaMarca;
+    }
+
+    public JComboBox<String> getjComboStatus() {
+        return jComboStatus;
+    }
+
+    public void setjComboStatus(JComboBox<String> jComboStatus) {
+        this.jComboStatus = jComboStatus;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel10() {
+        return jLabel10;
+    }
+
+    public void setjLabel10(JLabel jLabel10) {
+        this.jLabel10 = jLabel10;
+    }
+
+    public JLabel getjLabel11() {
+        return jLabel11;
+    }
+
+    public void setjLabel11(JLabel jLabel11) {
+        this.jLabel11 = jLabel11;
+    }
+
+    public JLabel getjLabel12() {
+        return jLabel12;
+    }
+
+    public void setjLabel12(JLabel jLabel12) {
+        this.jLabel12 = jLabel12;
+    }
+
+    public JLabel getjLabel13() {
+        return jLabel13;
+    }
+
+    public void setjLabel13(JLabel jLabel13) {
+        this.jLabel13 = jLabel13;
+    }
+
+    public JLabel getjLabel14() {
+        return jLabel14;
+    }
+
+    public void setjLabel14(JLabel jLabel14) {
+        this.jLabel14 = jLabel14;
+    }
+
+    public JLabel getjLabel15() {
+        return jLabel15;
+    }
+
+    public void setjLabel15(JLabel jLabel15) {
+        this.jLabel15 = jLabel15;
+    }
+
+    public JLabel getjLabel16() {
+        return jLabel16;
+    }
+
+    public void setjLabel16(JLabel jLabel16) {
+        this.jLabel16 = jLabel16;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public void setjLabel5(JLabel jLabel5) {
+        this.jLabel5 = jLabel5;
+    }
+
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public void setjLabel6(JLabel jLabel6) {
+        this.jLabel6 = jLabel6;
+    }
+
+    public JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    public void setjLabel7(JLabel jLabel7) {
+        this.jLabel7 = jLabel7;
+    }
+
+    public JLabel getjLabel8() {
+        return jLabel8;
+    }
+
+    public void setjLabel8(JLabel jLabel8) {
+        this.jLabel8 = jLabel8;
+    }
+
+    public JLabel getjLabel9() {
+        return jLabel9;
+    }
+
+    public void setjLabel9(JLabel jLabel9) {
+        this.jLabel9 = jLabel9;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public void setjPanel1(JPanel jPanel1) {
+        this.jPanel1 = jPanel1;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public void setjPanel2(JPanel jPanel2) {
+        this.jPanel2 = jPanel2;
+    }
+
+    public JPanel getjPanel3() {
+        return jPanel3;
+    }
+
+    public void setjPanel3(JPanel jPanel3) {
+        this.jPanel3 = jPanel3;
+    }
+
+    public JTextField getjTextFieldClasse() {
+        return jTextFieldClasse;
+    }
+
+    public void setjTextFieldClasse(JTextField jTextFieldClasse) {
+        this.jTextFieldClasse = jTextFieldClasse;
+    }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -143,6 +305,7 @@ public class NewViewProduto extends javax.swing.JFrame {
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\aluno\\Documents\\Kirchmann\\Yago\\NewMarketMaven\\src\\test\\java\\imagens\\Delete.png")); // NOI18N
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setActionCommand("0");
         jButtonCancelar.setEnabled(false);
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,6 +316,7 @@ public class NewViewProduto extends javax.swing.JFrame {
 
         jButtonGravar.setIcon(new javax.swing.ImageIcon("C:\\Users\\aluno\\Documents\\Kirchmann\\Yago\\NewMarketMaven\\src\\test\\java\\imagens\\OK.png")); // NOI18N
         jButtonGravar.setText("Gravar");
+        jButtonGravar.setActionCommand("0");
         jButtonGravar.setEnabled(false);
         jButtonGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

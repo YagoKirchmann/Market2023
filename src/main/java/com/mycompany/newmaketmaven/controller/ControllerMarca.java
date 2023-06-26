@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import com.mycompany.newmaketmaven.model.Marca;
+import com.mycompany.newmaketmaven.utillities.Utils;
 import com.mycompany.newmaketmaven.view.NewBuscaMarca;
 import com.mycompany.newmaketmaven.view.NewViewMarca;
 
@@ -29,8 +30,8 @@ public class ControllerMarca implements ActionListener{
             telaCadMarca.getjButtonNovo().addActionListener(this);
             telaCadMarca.getjButtonSair().addActionListener(this);
     
-            telaCadMarca.ativa(true);
-            telaCadMarca.ligaDesliga(false);
+            Utils.ativa(true, telaCadMarca.getjPanel2());
+            Utils.ligaDesliga(false, telaCadMarca.getjPanel3());
             
     }
     
@@ -38,14 +39,14 @@ public class ControllerMarca implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == telaCadMarca.getjButtonNovo()) {
-            telaCadMarca.ativa(false);
-            telaCadMarca.ligaDesliga(true);
+            Utils.ativa(false, telaCadMarca.getjPanel2());
+            Utils.ligaDesliga(true, telaCadMarca.getjPanel3());
             telaCadMarca.getTxtId().setEnabled(false);
             telaCadMarca.getjTextFieldDescricao().requestFocus();
             
         } else if (e.getSource() == telaCadMarca.getjButtonCancelar()) {
-            telaCadMarca.ativa(true);
-            telaCadMarca.ligaDesliga(false);
+            Utils.ativa(true, telaCadMarca.getjPanel2());
+            Utils.ligaDesliga(false, telaCadMarca.getjPanel3());
             
         } else if (e.getSource() == telaCadMarca.getjButtonBuscar()) {
             NewBuscaMarca telaBusca = new NewBuscaMarca(null,true);
@@ -58,8 +59,8 @@ public class ControllerMarca implements ActionListener{
             } else {
                 Marca marca = new Marca();
                 marca.setDescricao(telaCadMarca.getjTextFieldDescricao().getText());
-                telaCadMarca.ativa(true);
-                telaCadMarca.ligaDesliga(false);
+            Utils.ativa(true, telaCadMarca.getjPanel2());
+            Utils.ligaDesliga(false, telaCadMarca.getjPanel3());
             }
         } else if(e.getSource() == telaCadMarca.getjButtonSair()) {
             telaCadMarca.dispose();        

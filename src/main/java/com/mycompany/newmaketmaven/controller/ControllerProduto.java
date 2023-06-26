@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import com.mycompany.newmaketmaven.model.Produto;
+import com.mycompany.newmaketmaven.utillities.Utils;
 import com.mycompany.newmaketmaven.view.NewBuscaProduto;
 import com.mycompany.newmaketmaven.view.NewViewProduto;
 
@@ -29,8 +30,8 @@ public class ControllerProduto implements ActionListener{
             telaCadProduto.getjButtonNovo().addActionListener(this);
             telaCadProduto.getjButtonSair().addActionListener(this);
     
-            telaCadProduto.ativa(true);
-            telaCadProduto.ligaDesliga(false);
+            Utils.ativa(true, telaCadProduto.getjPanel2());
+            Utils.ligaDesliga(false, telaCadProduto.getjPanel3());
             
     }
     
@@ -38,13 +39,13 @@ public class ControllerProduto implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == telaCadProduto.getjButtonNovo()) {
-            telaCadProduto.ativa(false);
-            telaCadProduto.ligaDesliga(true);
+            Utils.ativa(false, telaCadProduto.getjPanel2());
+            Utils.ligaDesliga(true, telaCadProduto.getjPanel3());
             telaCadProduto.getjTextFieldDescricao().requestFocus();
             
         } else if (e.getSource() == telaCadProduto.getjButtonCancelar()) {
-            telaCadProduto.ativa(true);
-            telaCadProduto.ligaDesliga(false);
+            Utils.ativa(true, telaCadProduto.getjPanel2());
+            Utils.ligaDesliga(false, telaCadProduto.getjPanel3());
             
         } else if (e.getSource() == telaCadProduto.getjButtonBuscar()) {
             
@@ -78,8 +79,8 @@ public class ControllerProduto implements ActionListener{
             }else {
                 Produto produto = new Produto();
                 produto.setDescricao(telaCadProduto.getjTextFieldDescricao().getText());
-                telaCadProduto.ativa(true);
-                telaCadProduto.ligaDesliga(false);
+            Utils.ativa(true, telaCadProduto.getjPanel2());
+            Utils.ligaDesliga(false, telaCadProduto.getjPanel3());
             }
         } else if(e.getSource() == telaCadProduto.getjButtonSair()) {
             telaCadProduto.dispose();        

@@ -133,6 +133,7 @@
               <Image iconType="2" name="C:\Users\aluno\Documents\Kirchmann\Yago\NewMarketMaven\src\test\java\imagens\AAA\Delete.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
+            <Property name="actionCommand" type="java.lang.String" value="0"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -145,6 +146,7 @@
               <Image iconType="2" name="C:\Users\aluno\Documents\Kirchmann\Yago\NewMarketMaven\src\test\java\imagens\AAA\OK.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Gravar"/>
+            <Property name="actionCommand" type="java.lang.String" value="0"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>

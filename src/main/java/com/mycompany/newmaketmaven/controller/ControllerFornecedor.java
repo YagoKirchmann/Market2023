@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import com.mycompany.newmaketmaven.model.Fornecedor;
+import com.mycompany.newmaketmaven.utillities.Utils;
 import com.mycompany.newmaketmaven.view.NewBuscaFornecedor;
 import com.mycompany.newmaketmaven.view.NewViewFornecedor;
 
@@ -29,24 +30,24 @@ public class ControllerFornecedor implements ActionListener{
             telaCadFornecedor.getjButtonNovo().addActionListener(this);
             telaCadFornecedor.getjButtonSair().addActionListener(this);
     
-            telaCadFornecedor.ativa(true);
-            telaCadFornecedor.ligaDesliga(false);
+            Utils.ativa(true, telaCadFornecedor.getjPanel2());
+            Utils.ligaDesliga(false, telaCadFornecedor.getjPanel3());
             
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == telaCadFornecedor.getjButtonNovo()) {
-            telaCadFornecedor.ativa(false);
-            telaCadFornecedor.ligaDesliga(true);
+            Utils.ativa(false, telaCadFornecedor.getjPanel2());
+            Utils.ligaDesliga(true, telaCadFornecedor.getjPanel3());
             telaCadFornecedor.getjTextFieldLogradouro().setEnabled(false);
             telaCadFornecedor.getjTextFieldCidade().setEnabled(false);
             telaCadFornecedor.getjTextFieldBairro().setEnabled(false);        
             telaCadFornecedor.getjTextFieldNome().requestFocus();
             
         } else if (e.getSource() == telaCadFornecedor.getjButtonCancelar()) {
-            telaCadFornecedor.ativa(true);
-            telaCadFornecedor.ligaDesliga(false);
+            Utils.ativa(true, telaCadFornecedor.getjPanel2());
+            Utils.ligaDesliga(false, telaCadFornecedor.getjPanel3());
             
         } else if (e.getSource() == telaCadFornecedor.getjButtonBuscar()) {
             NewBuscaFornecedor telaBusca = new NewBuscaFornecedor();
@@ -67,8 +68,8 @@ public class ControllerFornecedor implements ActionListener{
             } else {
                 Fornecedor fornecedor = new Fornecedor();
                 fornecedor.setNome(telaCadFornecedor.getjTextFieldNome().getText());
-                telaCadFornecedor.ativa(true);
-                telaCadFornecedor.ligaDesliga(false);
+            Utils.ativa(true, telaCadFornecedor.getjPanel2());
+            Utils.ligaDesliga(false, telaCadFornecedor.getjPanel3());
             }
         } else if(e.getSource() == telaCadFornecedor.getjButtonSair()) {
             telaCadFornecedor.dispose();        

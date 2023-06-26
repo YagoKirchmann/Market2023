@@ -15,6 +15,7 @@ import com.mycompany.newmaketmaven.view.NewViewEndereco;
 import com.mycompany.newmaketmaven.services.BairroService;
 import com.mycompany.newmaketmaven.services.CidadeService;
 import com.mycompany.newmaketmaven.services.EnderecoService;
+import com.mycompany.newmaketmaven.utillities.Utils;
 import com.mycompany.newmaketmaven.view.NewBuscaBairro;
 import com.mycompany.newmaketmaven.view.NewBuscaCidade;
 
@@ -39,15 +40,15 @@ public class ControllerEndereco implements ActionListener{
             telaCadEndereco.getjButtonBuscaCida().addActionListener(this);
             telaCadEndereco.getjButtonBuscaBair().addActionListener(this);
     
-            telaCadEndereco.ativa(true);
-            telaCadEndereco.ligaDesliga(false);   
+            Utils.ativa(true, telaCadEndereco.getjPanel2());
+            Utils.ligaDesliga(false, telaCadEndereco.getjPanel3());  
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == telaCadEndereco.getjButtonNovo()) {
-            telaCadEndereco.ativa(false);
-            telaCadEndereco.ligaDesliga(true);
+            Utils.ativa(false, telaCadEndereco.getjPanel2());
+            Utils.ligaDesliga(true, telaCadEndereco.getjPanel3()); 
             telaCadEndereco.getjTextFieldCep().requestFocus();
            
         }else if(e.getSource() == telaCadEndereco.getjButtonBuscaCida()){
@@ -79,8 +80,8 @@ public class ControllerEndereco implements ActionListener{
         }else if (e.getSource() == telaCadEndereco.getjButtonCancelar()) {
             
             this.codigo = 0;
-            telaCadEndereco.ativa(true);
-            telaCadEndereco.ligaDesliga(false);
+            Utils.ativa(true, telaCadEndereco.getjPanel2());
+            Utils.ligaDesliga(false, telaCadEndereco.getjPanel3()); 
             
         }else if (e.getSource() == telaCadEndereco.getjButtonBuscar()) {
             
@@ -95,8 +96,8 @@ public class ControllerEndereco implements ActionListener{
                 EnderecoService enderecoService = new EnderecoService();
                 endereco = enderecoService.buscar(codigoCid);
                 
-                telaCadEndereco.ativa(false);
-                telaCadEndereco.ligaDesliga(true);
+            Utils.ativa(false, telaCadEndereco.getjPanel2());
+            Utils.ligaDesliga(true, telaCadEndereco.getjPanel3()); 
               
                 telaCadEndereco.getjTextFieldCep().setText(endereco.getCep()+ "");
                 telaCadEndereco.getjTextFieldCidade().setText(endereco.getCidade().getDescricao());
@@ -136,8 +137,8 @@ public class ControllerEndereco implements ActionListener{
                 }else{
                     enderecoService.criar(endereco);
                 };
-                telaCadEndereco.ativa(true);
-                telaCadEndereco.ligaDesliga(false);
+            Utils.ativa(true, telaCadEndereco.getjPanel2());
+            Utils.ligaDesliga(false, telaCadEndereco.getjPanel3()); 
             }
         } else if(e.getSource() == telaCadEndereco.getjButtonSair()) {
             telaCadEndereco.dispose();        
