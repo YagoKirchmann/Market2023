@@ -48,7 +48,8 @@ public class ControllerCidade implements ActionListener{
             telaCadCidade.getTxtDescricao().requestFocus();
             
         } else if (e.getSource() == telaCadCidade.getjButtonCancelar()) {
-
+            Utils.ativa(true, telaCadCidade.getjPanel2());
+            Utils.ligaDesliga(false,telaCadCidade.getjPanel3());
             
         } else if (e.getSource() == telaCadCidade.getjButtonBuscar()) {
             this.codigo = 0;
