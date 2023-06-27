@@ -1,9 +1,9 @@
 
 package com.mycompany.newmaketmaven.controller;
 
-import com.mycompany.newmaketmaven.model.CondicaoPgto;
+import com.mycompany.newmaketmaven.model.CondicaoPagamento;
 import com.mycompany.newmaketmaven.model.Produto;
-import com.mycompany.newmaketmaven.services.CondPgtoService;
+import com.mycompany.newmaketmaven.services.CondicaoPagamentoService;
 import com.mycompany.newmaketmaven.services.ProdutoService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +26,7 @@ public class ControllerBuscaCondPgto implements ActionListener{
         
         DefaultTableModel tabela = (DefaultTableModel) this.newBuscaCondPgto.getjTableDadosAchados().getModel();
         
-        for (CondicaoPgto objetoAtualDaLista : CondPgtoService.buscar()) {
+        for (CondicaoPagamento objetoAtualDaLista : CondicaoPagamentoService.buscar()) {
             
             tabela.addRow(new Object[]{objetoAtualDaLista.getId(),          
                                        objetoAtualDaLista.getStatus()});                                       

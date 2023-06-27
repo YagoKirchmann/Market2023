@@ -41,7 +41,7 @@ public class Compra implements Serializable {
     private char status;
     @JoinColumn
     @ManyToOne
-    private CondicaoPgto condicaoPgto;
+    private CondicaoPagamento condicaoPgto;
     @JoinColumn
     @ManyToOne
     private Pagar pagar;
@@ -55,7 +55,7 @@ public class Compra implements Serializable {
     public Compra() {
     }
 
-    public Compra(int id, Date dtCompra, Date hrCompra, String numNF, String tipoNF, float vlrDesc, float vlrAcresc, float totalNF, char status, CondicaoPgto condicaoPgto, Pagar pagar, ItensCompra itensCompra, Fornecedor fornecedor) {
+    public Compra(int id, Date dtCompra, Date hrCompra, String numNF, String tipoNF, float vlrDesc, float vlrAcresc, float totalNF, char status, CondicaoPagamento condicaoPgto, Pagar pagar, ItensCompra itensCompra, Fornecedor fornecedor) {
         this.id = id;
         this.dtCompra = dtCompra;
         this.hrCompra = hrCompra;
@@ -143,11 +143,11 @@ public class Compra implements Serializable {
         this.status = status;
     }
 
-    public CondicaoPgto getCondicaoPgto() {
+    public CondicaoPagamento getCondicaoPgto() {
         return condicaoPgto;
     }
 
-    public void setCondicaoPgto(CondicaoPgto condicaoPgto) {
+    public void setCondicaoPgto(CondicaoPagamento condicaoPgto) {
         this.condicaoPgto = condicaoPgto;
     }
 

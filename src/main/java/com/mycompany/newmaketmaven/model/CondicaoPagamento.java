@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class CondicaoPgto implements Serializable {
+public class CondicaoPagamento implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,10 @@ public class CondicaoPgto implements Serializable {
     @Column
     private char status;
 
-    public CondicaoPgto() {
+    public CondicaoPagamento() {
     }
 
-    public CondicaoPgto(int id, String descricaoCondicao, int numParcelas, int diasPrimeiraParcela, int diasEntreParcela, char status) {
+    public CondicaoPagamento(int id, String descricaoCondicao, int numParcelas, int diasPrimeiraParcela, int diasEntreParcela, char status) {
         this.id = id;
         this.descricaoCondicao = descricaoCondicao;
         this.numParcelas = numParcelas;

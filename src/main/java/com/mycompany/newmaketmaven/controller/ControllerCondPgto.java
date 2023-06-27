@@ -7,7 +7,7 @@ package com.mycompany.newmaketmaven.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import com.mycompany.newmaketmaven.model.CondicaoPgto;
+import com.mycompany.newmaketmaven.model.CondicaoPagamento;
 import com.mycompany.newmaketmaven.utillities.Utils;
 import com.mycompany.newmaketmaven.view.NewBuscaCondPgto;
 import com.mycompany.newmaketmaven.view.NewViewCondPgto;
@@ -59,7 +59,7 @@ public class ControllerCondPgto implements ActionListener{
             }else if (telaCadCondPgto.getjTextField1DiasPrimParc().getText().trim().equalsIgnoreCase("")){
                 JOptionPane.showMessageDialog(null, "Atributo Dias P/Primeira Parcela é Obrigatório");
             }else {
-                CondicaoPgto condicaoPgto = new CondicaoPgto();
+                CondicaoPagamento condicaoPgto = new CondicaoPagamento();
                 condicaoPgto.setDescricaoCondicao(telaCadCondPgto.getjTextFieldDescricao().getText());
                 Utils.ativa(true, telaCadCondPgto.getjPanel2());
                 Utils.ligaDesliga(false, telaCadCondPgto.getjPanel3()); 

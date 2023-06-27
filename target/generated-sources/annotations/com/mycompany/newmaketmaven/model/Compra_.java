@@ -1,6 +1,6 @@
 package com.mycompany.newmaketmaven.model;
 
-import com.mycompany.newmaketmaven.model.CondicaoPgto;
+import com.mycompany.newmaketmaven.model.CondicaoPagamento;
 import com.mycompany.newmaketmaven.model.Fornecedor;
 import com.mycompany.newmaketmaven.model.ItensCompra;
 import com.mycompany.newmaketmaven.model.Pagar;
@@ -17,7 +17,7 @@ public class Compra_ {
     public static volatile SingularAttribute<Compra, String> tipoNF;
     public static volatile SingularAttribute<Compra, Float> vlrAcresc;
     public static volatile SingularAttribute<Compra, Date> hrCompra;
-    public static volatile SingularAttribute<Compra, CondicaoPgto> condicaoPgto;
+    public static volatile SingularAttribute<Compra, CondicaoPagamento> condicaoPgto;
     public static volatile SingularAttribute<Compra, Pagar> pagar;
     public static volatile SingularAttribute<Compra, Float> totalNF;
     public static volatile SingularAttribute<Compra, String> numNF;

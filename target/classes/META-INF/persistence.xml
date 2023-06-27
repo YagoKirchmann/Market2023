@@ -8,7 +8,6 @@
     <class>com.mycompany.newmaketmaven.model.Cliente</class>
     <class>com.mycompany.newmaketmaven.model.Colaborador</class>
     <class>com.mycompany.newmaketmaven.model.Compra</class>
-    <class>com.mycompany.newmaketmaven.model.CondicaoPgto</class>
     <class>com.mycompany.newmaketmaven.model.CupomFiscal</class>
     <class>com.mycompany.newmaketmaven.model.Endereco</class>
     <class>com.mycompany.newmaketmaven.model.Fornecedor</class>
@@ -19,6 +18,7 @@
     <class>com.mycompany.newmaketmaven.model.Pagamento</class>
     <class>com.mycompany.newmaketmaven.model.Pagar</class>
     <class>com.mycompany.newmaketmaven.model.Produto</class>
+    <class>com.mycompany.newmaketmaven.model.CondicaoPagamento</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
