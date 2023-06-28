@@ -75,9 +75,9 @@ public class ControllerBairro implements ActionListener{
             if (telaCadBairro.getTxtDescricao().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Atributo Descrição é Obrigatório");
             } else {
-                Bairro bairro = new Bairro();
-                bairro.setDescricao(telaCadBairro.getTxtDescricao().getText());
                 
+                Bairro bairro = new Bairro();
+                bairro.setDescricao(telaCadBairro.getTxtDescricao().getText());     
                 BairroService bairroService = new BairroService(); 
                 
                 if(this.telaCadBairro.getTxtId().getText().equalsIgnoreCase("")){

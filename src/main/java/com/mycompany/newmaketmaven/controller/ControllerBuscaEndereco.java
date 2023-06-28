@@ -18,10 +18,11 @@ public class ControllerBuscaEndereco implements ActionListener{
     NewBuscaEndereco newBuscaEndereco;
     
     public ControllerBuscaEndereco(NewBuscaEndereco newBuscaEndereco){
-        this.newBuscaEndereco = newBuscaEndereco;
         
+        this.newBuscaEndereco = newBuscaEndereco;
         this.newBuscaEndereco.getjButtonCarregar().addActionListener(this);
         this.newBuscaEndereco.getjButtonSair().addActionListener(this);
+        
         DefaultTableModel tabela = (DefaultTableModel) this.newBuscaEndereco.getjTableDadosAchados().getModel();  
         
         for (Endereco objetoAtualDaLista : EnderecoService.buscar()) {
@@ -33,18 +34,16 @@ public class ControllerBuscaEndereco implements ActionListener{
         }
     }
     
-    
-    public void actioPerfomed(ActionEvent acao){
-        
-    }
 
     @Override
     public void actionPerformed(ActionEvent acao) {
-        if(this.newBuscaEndereco.getjTableDadosAchados().getValueAt(this.newBuscaEndereco.getjTableDadosAchados().getSelectedRow(), 0 ) != null){         
+        if(acao.getSource() == this.newBuscaEndereco.getjButtonCarregar()){
+            if(this.newBuscaEndereco.getjTableDadosAchados().getValueAt(this.newBuscaEndereco.getjTableDadosAchados().getSelectedRow(), 0 ) != null){         
+                
                 ControllerEndereco.codigo = (int) this.newBuscaEndereco.getjTableDadosAchados().getValueAt(this.newBuscaEndereco.getjTableDadosAchados().getSelectedRow(), 0);   
-                ControllerClientes.codigoEnd = (int) this.newBuscaEndereco.getjTableDadosAchados().getValueAt(this.newBuscaEndereco.getjTableDadosAchados().getSelectedRow(), 0);
                 newBuscaEndereco.dispose();
-            }else if(acao.getSource() == this.newBuscaEndereco.getjButtonSair()){
+            }
+        }else if(acao.getSource() == this.newBuscaEndereco.getjButtonSair()){
             newBuscaEndereco.dispose();
         }
     }

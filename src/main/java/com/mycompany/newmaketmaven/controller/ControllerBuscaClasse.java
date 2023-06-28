@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import com.mycompany.newmaketmaven.model.Classe;
-import com.mycompany.newmaketmaven.modelDAO.ClasseDAO;
 import com.mycompany.newmaketmaven.services.ClasseService;
 import com.mycompany.newmaketmaven.view.NewBuscaClasse;
 
@@ -32,21 +31,17 @@ public class ControllerBuscaClasse implements ActionListener{
     }
     
     
-    public void actioPerfomed(ActionEvent acao){
-        
-    }
-
     @Override
     public void actionPerformed(ActionEvent acao) {
+        if(acao.getSource() == this.newBuscaClasse.getjButtonCarregar()){
          if(this.newBuscaClasse.getjTableDadosAchados().getValueAt(this.newBuscaClasse.getjTableDadosAchados().getSelectedRow(), 0 ) != null){
          
                 ControllerClasse.codigo = (int) this.newBuscaClasse.getjTableDadosAchados().getValueAt(this.newBuscaClasse.getjTableDadosAchados().getSelectedRow(), 0);
-                
                 newBuscaClasse.dispose();
-            }else if(acao.getSource() == this.newBuscaClasse.getjButtonSair()){
+                
+         }
+        }else if(acao.getSource() == this.newBuscaClasse.getjButtonSair()){
             newBuscaClasse.dispose();
         }
     }
-            
-    
 }

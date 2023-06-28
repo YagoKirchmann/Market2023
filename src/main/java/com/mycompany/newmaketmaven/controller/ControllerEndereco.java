@@ -54,26 +54,27 @@ public class ControllerEndereco implements ActionListener{
         }else if(e.getSource() == telaCadEndereco.getjButtonBuscaCida()){
             this.codigoCid = 0;
             NewBuscaCidade telaBuscaCidade = new NewBuscaCidade(telaCadEndereco, true);
-            ControllerBuscaCidade controllerCidade = new ControllerBuscaCidade(telaBuscaCidade);
+            ControllerBuscaCidade controllerBuscaCidade = new ControllerBuscaCidade(telaBuscaCidade);
             telaBuscaCidade.setVisible(true);
                 
             if(this.codigoCid != 0){
                 Cidade cidade = new Cidade();
                 CidadeService cidadeService = new CidadeService();
-                cidade = cidadeService.buscar(codigoCid);
+                cidade = CidadeService.buscar(codigoCid);
                   
                 telaCadEndereco.getjTextFieldCidade().setText(cidade.getDescricao()+ "");
             }          
         }else if(e.getSource() == telaCadEndereco.getjButtonBuscaBair()){
             this.codigoBair = 0;
             NewBuscaBairro telaBuscaBairro = new NewBuscaBairro(telaCadEndereco, true);
-            ControllerBuscaBairro controllerBairro = new ControllerBuscaBairro(telaBuscaBairro);
+            ControllerBuscaBairro controllerBuscaBairro = new ControllerBuscaBairro(telaBuscaBairro);
+            
             telaBuscaBairro.setVisible(true);
                 
             if(this.codigoBair != 0){
                 Bairro bairro = new Bairro();
                 BairroService bairroService = new BairroService();
-                bairro = bairroService.buscar(codigoCid);
+                bairro = BairroService.buscar(codigoBair);
                   
                 telaCadEndereco.getjTextFieldBairro().setText(bairro.getDescricao()+ "");
             }          
@@ -85,8 +86,8 @@ public class ControllerEndereco implements ActionListener{
             
         }else if (e.getSource() == telaCadEndereco.getjButtonBuscar()) {
             
-            this.codigo = 0;
-            
+             this.codigo = 0;
+
             NewBuscaEndereco telaBusca = new NewBuscaEndereco(null,true);
             ControllerBuscaEndereco controllerEndereco = new ControllerBuscaEndereco(telaBusca);
             telaBusca.setVisible(true);
@@ -94,10 +95,10 @@ public class ControllerEndereco implements ActionListener{
             if(this.codigo != 0){
                 Endereco endereco = new Endereco();
                 EnderecoService enderecoService = new EnderecoService();
-                endereco = enderecoService.buscar(codigoCid);
+                endereco = enderecoService.buscar(codigo);
                 
-            Utils.ativa(false, telaCadEndereco.getjPanel2());
-            Utils.ligaDesliga(true, telaCadEndereco.getjPanel3()); 
+                Utils.ativa(false, telaCadEndereco.getjPanel2());
+                Utils.ligaDesliga(true, telaCadEndereco.getjPanel3()); 
               
                 telaCadEndereco.getjTextFieldCep().setText(endereco.getCep()+ "");
                 telaCadEndereco.getjTextFieldCidade().setText(endereco.getCidade().getDescricao());
@@ -120,11 +121,12 @@ public class ControllerEndereco implements ActionListener{
             }else {
                 
                 Endereco endereco = new Endereco();
-                Cidade cidade = (new CidadeService()).buscar(telaCadEndereco.getjTextFieldCidade().getText()); // sttar valores
-                Bairro bairro = (new BairroService()).buscar(telaCadEndereco.getjTextFieldBairro().getText()); // sttar valores
                 
+                Cidade cidade = (new CidadeService()).buscar(telaCadEndereco.getjTextFieldCidade().getText()); 
+                Bairro bairro = (new BairroService()).buscar(telaCadEndereco.getjTextFieldBairro().getText()); 
                 endereco.setCidade(cidade);
                 endereco.setBairro(bairro);
+                
                 endereco.setLogradouro(telaCadEndereco.getjTextFieldLogradouro().getText());
                 endereco.setCep(telaCadEndereco.getjTextFieldCep().getText());
                 

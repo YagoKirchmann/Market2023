@@ -89,8 +89,7 @@ public class NewBuscaMarca extends javax.swing.JDialog {
 
         jTableDadosAchados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "Descrição"

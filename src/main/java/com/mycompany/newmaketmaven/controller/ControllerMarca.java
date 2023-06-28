@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import com.mycompany.newmaketmaven.model.Marca;
+import com.mycompany.newmaketmaven.services.MarcaService;
 import com.mycompany.newmaketmaven.utillities.Utils;
 import com.mycompany.newmaketmaven.view.NewBuscaMarca;
 import com.mycompany.newmaketmaven.view.NewViewMarca;
@@ -18,6 +19,7 @@ import com.mycompany.newmaketmaven.view.NewViewMarca;
  */
 public class ControllerMarca implements ActionListener{
     NewViewMarca telaCadMarca;
+    public static int codigo;
     
     public ControllerMarca (NewViewMarca parTelaCadMarca){
         
@@ -49,18 +51,44 @@ public class ControllerMarca implements ActionListener{
             Utils.ligaDesliga(false, telaCadMarca.getjPanel3());
             
         } else if (e.getSource() == telaCadMarca.getjButtonBuscar()) {
-            NewBuscaMarca telaBusca = new NewBuscaMarca(null,true);
+            this.codigo = 0;
+            
+            NewBuscaMarca telaBusca = new NewBuscaMarca(null, true);
             ControllerBuscaMarca controllerMarca = new ControllerBuscaMarca(telaBusca);
             telaBusca.setVisible(true);
+            
+            if(this.codigo != 0){
+                Marca marca = new Marca();
+                MarcaService marcaService = new MarcaService();
+                marca = MarcaService.buscar(codigo);
+                
+                Utils.ativa(false, telaCadMarca.getjPanel2());
+                Utils.ligaDesliga(true,telaCadMarca.getjPanel3());
+                
+                telaCadMarca.getTxtId().setText(marca.getId()+ "");
+                telaCadMarca.getjTextFieldDescricao().setText(marca.getDescricao());
+                telaCadMarca.getTxtId().setEnabled(false);
+            }
         
         } else if (e.getSource() == telaCadMarca.getjButtonGravar()) {
             if (telaCadMarca.getjTextFieldDescricao().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Atributo Descricao é Obrigatório");
             } else {
+                
                 Marca marca = new Marca();
                 marca.setDescricao(telaCadMarca.getjTextFieldDescricao().getText());
-            Utils.ativa(true, telaCadMarca.getjPanel2());
-            Utils.ligaDesliga(false, telaCadMarca.getjPanel3());
+                MarcaService marcaService = new MarcaService();
+                
+                 if(this.telaCadMarca.getTxtId().getText().equalsIgnoreCase("")){
+                    MarcaService.criar(marca);
+                }else{
+                    marca.setId(Integer.parseInt(telaCadMarca.getTxtId().getText()));
+                    marcaService.atualizar(marca);
+                }
+  
+                Utils.ativa(true, telaCadMarca.getjPanel2());
+                Utils.ligaDesliga(false, telaCadMarca.getjPanel3());
+                
             }
         } else if(e.getSource() == telaCadMarca.getjButtonSair()) {
             telaCadMarca.dispose();        

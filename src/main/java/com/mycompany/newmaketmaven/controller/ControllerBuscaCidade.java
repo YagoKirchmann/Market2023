@@ -31,25 +31,21 @@ public class ControllerBuscaCidade implements ActionListener{
         }
     }
     
-    
-    public void actioPerfomed(ActionEvent acao){
-        
-    }
 
     @Override
     public void actionPerformed(ActionEvent acao) {
        if(acao.getSource() == this.newBuscaCidade.getjButtonCarregar()){
             if(this.newBuscaCidade.getjTableDadosAchados().getValueAt(this.newBuscaCidade.getjTableDadosAchados().getSelectedRow(), 0 ) != null){         
+                
                 ControllerCidade.codigo = (int) this.newBuscaCidade.getjTableDadosAchados().getValueAt(this.newBuscaCidade.getjTableDadosAchados().getSelectedRow(), 0);
                 ControllerEndereco.codigoCid = (int) this.newBuscaCidade.getjTableDadosAchados().getValueAt(this.newBuscaCidade.getjTableDadosAchados().getSelectedRow(), 0);
-                
                 newBuscaCidade.dispose();
-            }else if(acao.getSource() == this.newBuscaCidade.getjButtonSair()){
+               }
+            
+        }else if(acao.getSource() == this.newBuscaCidade.getjButtonSair()){
             newBuscaCidade.dispose();
-        }
     }
-    }
-    
+  }
 }
             
 
